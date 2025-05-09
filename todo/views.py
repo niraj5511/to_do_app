@@ -12,7 +12,7 @@ def index(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('/')
+        return redirect('index')
 
     context = {'tasks': tasks, 'form': form}
     return render(request, 'todo/index.html', context)
@@ -20,7 +20,7 @@ def index(request):
 def deleteTask(request, pk):
     task = Task.objects.get(id=pk)
     task.delete()
-    return redirect('/')
+    return redirect('index')
 
 def editTask(request, pk):
     task = Task.objects.get(id=pk)
@@ -30,7 +30,7 @@ def editTask(request, pk):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('index')
 
     context = {'form': form, 'task': task}
     return render(request, 'todo/edit.html', context)
@@ -40,7 +40,7 @@ def toggleComplete(request, pk):
     task = Task.objects.get(id=pk)
     task.completed = not task.completed
     task.save()
-    return redirect('/')
+    return redirect('index')
 
 def home(request):
     return render(request, 'home.html')

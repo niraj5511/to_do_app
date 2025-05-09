@@ -135,6 +135,11 @@
               {% else %} ☐ {{ task.title }} {% endif %}
             </a>
           </div>
+          <div class="task-created-at">
+            <small
+              >Created on: {{ task.created_at|date:"F j, Y, g:i a" }}</small
+            >
+          </div>
           <div class="actions">
             <a href="{% url 'edit' task.id %}">Edit</a>
             <a href="{% url 'delete' task.id %}">Delete</a>
